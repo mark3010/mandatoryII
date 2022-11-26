@@ -1,11 +1,13 @@
 <script>
-    import {Link} from 'svelte-navigator';
+    import { Link } from 'svelte-navigator';
+    import { dataset_dev } from 'svelte/internal';
     import { BASE_URL } from "../../store/globals.js";
 
     let email = ''
 
     const submit = async () => {
-        await fetch(`${$BASE_URL}/api/recoverPassword`, {
+      //FORM
+        const response = await fetch(`${$BASE_URL}/api/recoverPassword`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',
@@ -14,7 +16,13 @@
             })
         });
 
-        //GOTO PAGE HERE
+        //RESPONSE
+        const data = await response.json();
+
+        if (data.response) {
+          toastr.info('an email has been sent to your email with more details')
+        }
+  
     }
 </script>
 

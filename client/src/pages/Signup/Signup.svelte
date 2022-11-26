@@ -7,7 +7,8 @@
     let name = '', username = '', password = ''
 
     const submit = async () => {
-        await fetch(`${$BASE_URL}/api/register`, {
+        //FORM
+        const response = await fetch(`${$BASE_URL}/api/register`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -17,8 +18,13 @@
             })
         });
 
-        //GOT PAGE HERE
-        navigate("/login", { replace: true });
+        //RESPONSE
+        const data = await response.json();
+
+        if (data.response) {
+            toastr.info('your account has been created')
+            navigate("/login", { replace: true });
+        }        
     }
 </script>
 

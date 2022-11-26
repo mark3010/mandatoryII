@@ -1,13 +1,13 @@
 <script>
     import { Link, useNavigate, useLocation } from 'svelte-navigator';
     import { BASE_URL } from "../../store/globals.js";
-    import { authenticated } from '../../store/auth.js';
+    import { authenticated, name } from '../../store/auth.js';
 
     const navigate = useNavigate(), location = useLocation();
     let username = '', password = '';
 
     const submit = async () => {
-        //REQUEST FORM
+        //FORM
         const response = await fetch(`${$BASE_URL}/api/login`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -25,6 +25,7 @@
         if (data.response) {
           toastr.info('login succesful')
           authenticated.set(true)
+          name.set(data.name)
           navigate(from, { replace: true });
         }
     }

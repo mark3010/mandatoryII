@@ -32,7 +32,8 @@ router.post("/api/register", async (req, res) => {
 
         console.log("user has been created: ", username);
         
-        res.send({ changes: result.changes });
+        res.send({  response: true,
+                    changes: result.changes });
     })
 });
 

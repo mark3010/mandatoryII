@@ -18,7 +18,7 @@
     {#each users as user }
         <ul>
             <li>
-                <p>name: {user.name}, username: {user.username}</p>
+                <p>name: {user.name}</p>
             </li>
         </ul>
     {/each}

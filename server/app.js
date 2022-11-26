@@ -7,6 +7,7 @@ import express from "express";
 const app = express();
 
 //EXPRESS SECURITY
+/*
 import helmet from "helmet";
 app.use(helmet());
 
@@ -15,7 +16,7 @@ const generalLimiter = rateLimit({
     windowMs: 10 * 60 * 1000,
     max: 80
 });
-app.use(generalLimiter);
+app.use(generalLimiter);*/
 
 //EXPRESS SESSIONS
 import session from "express-session";
