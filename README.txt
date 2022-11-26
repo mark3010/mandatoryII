@@ -1,1 +1,2 @@
-Mandatory 2 assignment from the NODEJS course on KEA
+Mandatory 2 assignment | NODEJS
+made by Mark Friis Larsen
