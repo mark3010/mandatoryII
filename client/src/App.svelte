@@ -8,6 +8,28 @@
   import HomePage from './pages/Home/Home.svelte';
   import RecoverPasswordPage from './pages/RecoverPassword/RecoverPassword.svelte';
   import DatabasePage from './pages/Database/Database.svelte';
+  import ProfilePage from './pages/Profile/Profile.svelte';
+  import StockPage from './pages/Stock/Stock.svelte';
+  import NotificationPage from './pages/Notifications/Notifications.svelte';
+
+    //TOASTR OPTIONS INIT 
+    toastr.options = {
+          "closeButton": true,
+          "debug": false,
+          "newestOnTop": false,
+          "progressBar": false,
+          "positionClass": "toast-bottom-right",
+          "preventDuplicates": false,
+          "onclick": null,
+          "showDuration": "300",
+          "hideDuration": "1000",
+          "timeOut": "5000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        }
 </script>
 <main>
   <Router>
@@ -18,6 +40,9 @@
       <Route path="/login"><LoginPage /></Route>
       <Route path="/register"><SignupPage /></Route>
       <Route path="/recoverPassword"><RecoverPasswordPage /></Route>
+      <Route path="/user"><ProfilePage /></Route>
+      <Route path="/stock"><StockPage /></Route>
+      <Route path="/user/notifications"><NotificationPage /></Route>
       <PrivateRoute path="/database"><DatabasePage /></PrivateRoute>
     </div>
 

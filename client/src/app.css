@@ -1,6 +1,7 @@
 /* NAVBAR */
 
-/* SIGN IN/ SIGN UP */
+
+/* SIGN IN / SIGN UP */
 html {
   height: 100vh;
   overflow: hidden;
@@ -37,4 +38,85 @@ body, #app, main, .page {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+
+
+/* COMMENT SECTION */
+:root {
+  /* primary colors */
+  --moderateBlue: hsl(238, 40%, 52%);
+  --softRed: hsl(358, 79%, 66%);
+  --lightGrayishBlue: hsl(239, 57%, 85%);
+  --paleRed: hsl(357, 100%, 86%);
+
+  /* neutral colors */
+  --darkBlue: hsl(212, 24%, 26%);
+  --grayishBlue: hsl(211, 10%, 45%);
+  --lightGray: hsl(223, 19%, 93%);
+  --veryLightGray: hsl(228, 33%, 97%);
+  --white: hsl(0, 0%, 100%);
+
+  /* font */
+  --fontFamily: 'Rubic';
+  --fontRegular: 400;
+  --fontMedium: 500;
+  --fontBold: 700;
+
+  /* breakpoints */
+  --brpMd: 46.875rem;
+  --brpLg: 90rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  font-family: var(--fontFamily), sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--veryLightGray);
+  color: var(--grayishBlue);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+button {
+  cursor: pointer;
+  font-weight: var(--fontBold);
+}
+
+input,
+button,
+textarea,
+select {
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
