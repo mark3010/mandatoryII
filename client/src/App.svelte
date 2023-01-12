@@ -40,9 +40,9 @@
       <Route path="/login"><LoginPage /></Route>
       <Route path="/register"><SignupPage /></Route>
       <Route path="/recoverPassword"><RecoverPasswordPage /></Route>
-      <Route path="/user"><ProfilePage /></Route>
-      <Route path="/stock"><StockPage /></Route>
-      <Route path="/user/notifications"><NotificationPage /></Route>
+      <Route path="/user/:uuid"><ProfilePage /></Route>
+      <Route path="/stock/:ticker"><StockPage /></Route>
+      <Route path="/user/:uuid/notifications"><NotificationPage /></Route>
       <PrivateRoute path="/database"><DatabasePage /></PrivateRoute>
     </div>
 

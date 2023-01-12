@@ -4,11 +4,12 @@
 
     const navigate = useNavigate()
 
-    let name = '', username = '', password = ''
+    let name, username, password = ''
 
     const submit = async () => {
-        //FORM
-        const response = await fetch(`${$BASE_URL}/api/register`, {
+        
+        //form
+        const response = await fetch(`${$BASE_URL}/v1/register`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -18,14 +19,12 @@
             })
         });
 
-        //RESPONSE
-        const data = await response.json();
-
-        if (data.response) {
+        //response
+        if (response.status === 200) {
             
             toastr["success"]('your account has succesfully been created')
             navigate("/login", { replace: true });
-        }        
+        }
     }
 </script>
 

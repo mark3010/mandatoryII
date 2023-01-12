@@ -44,6 +44,10 @@ app.use(userRouter);
 import contactRouter from "./routers/contactRouter.js";
 app.use(contactRouter);
 
+import stockRouter from "./routers/stockRouter.js";
+app.use(stockRouter);
+
+
 //SERVE FRONTEND
 import fs from "fs";
 

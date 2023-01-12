@@ -1,26 +1,34 @@
 <script>
     import { Link , useNavigate } from 'svelte-navigator';
-    import { authenticated , name} from '../store/auth.js';
+    import { authenticated , name, UUID} from '../store/auth.js';
 
     const navigate = useNavigate()
+
     //AUTHENTICATION
     let auth = false; 
     authenticated.subscribe(a => auth = a);
 
     let displayName = "user";
     name.subscribe(n => displayName = n)
+
+    let uuid = "missingUUID";
+    UUID.subscribe(u => uuid = u)
     //
 
     const logout = async () => {
-        const response = await fetch('http://localhost:8080/api/logout', {
+
+        //TODO: authentication does not check upon loading page, fix this and remove this line v
+        authenticated.set(false)
+        
+        const response = await fetch('http://localhost:8080/v1/logout', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',
         })
 
-        const data = await response.json();
+        //const data = await response.json();
 
-        if (data.response) {
+        if (response.status === 200) {
             authenticated.set(false)
             toastr["success"]('You have been logged out succesfully')
             navigate("/", { replace: true });
@@ -28,6 +36,7 @@
     }
 
 </script>
+
 <!--
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -47,17 +56,18 @@
         </Link>
         
         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-            <ul class="navbar-nav">
-                <a class="nav-link dropdown-toggle" href="/" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <ul class="navbar-nav ms-auto">
+                <a class="nav-link dropdown-toggle dropleft" href="/" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="/avatar/defaultavatar.png" width="20" height="20"alt="avatar"class="rounded-circle img-fluid">
                     {displayName}
                   </a>
-              <li class="nav-item dropdown ">
-                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                  <li><a class="dropdown-item" href="/user">Profile</a></li>
-                  <li><a class="dropdown-item" href="/user/notifications">Notifications</a></li>
+              <li class="nav-item dropdown">
+                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDarkDropdownMenuLink">
+                  <li><Link class="dropdown-item" to="/user/{uuid}" >Profile</Link></li>
+
+                  <li><Link class="dropdown-item" to="/user/{uuid}/notifications">Notifications</Link></li>
                   <hr>
-                  <li><a class="dropdown-item" on:click={logout} href="/">Log out</a></li>
+                  <li><Link class="dropdown-item" on:click={logout} to="/">Log out</Link></li>
                 </ul>
               </li>
             </ul>
