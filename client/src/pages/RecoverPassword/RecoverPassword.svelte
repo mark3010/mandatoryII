@@ -3,11 +3,11 @@
   import { dataset_dev } from 'svelte/internal';
   import { BASE_URL } from "../../store/globals.js";
 
-  let email = ''
+  let email = '';
 
   const submit = async () => {
     //FORM
-      const response = await fetch(`${$BASE_URL}/v1/recoverPassword`, {
+      const response = await fetch(`${$BASE_URL}/api/v1/recoverPassword`, {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           credentials: 'include',
@@ -16,16 +16,14 @@
           })
       });
 
-      //RESPONSE
-      const data = await response.json();
-
-      if (data.response) {
-        toastr["success"]('an email has been sent with account recovery info')
+    //success response
+      if (response.status === 200) {
+        toastr["success"]("recovery information has been sent to your email");
       }
-
   }
 </script>
 
+<div class="align-me">
 <div class="col-lg-8">
 <div class="card mb-4" style="width: 26rem; margin: 0 auto; float: none; margin-bottom: 10px;">
   <div class="card-body" >
@@ -44,5 +42,6 @@
       </div>
     </form>
     </div>
+</div>
 </div>
 </div>

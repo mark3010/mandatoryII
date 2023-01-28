@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
 
-const url = "mongodb://127.0.0.1:27017"; //default mongoDB setup
+//TODO: REPLACE WITH ENV VAR
+const url = "mongodb://127.0.0.1:27017"
 
 export const client = new MongoClient(url);
 
@@ -12,5 +13,4 @@ export default {
     users: findocDB.collection("users"),
     posts: findocDB.collection("posts"),
     stocks: findocDB.collection("stocks"),
-    
 };

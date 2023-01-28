@@ -1,12 +1,26 @@
 import { writable } from "svelte/store";
-import { persistStore } from "./persistStore";
 
+export const authenticated = writable("false");
+export const name = writable("");
+export const isAdmin = writable("");
+export const UUID = writable("");
 
-export const authenticated = persistStore('authenticated',false);
+//if value is already set, inherit...
+if (sessionStorage.getItem("userAuthenticated")) {
+    authenticated.set(sessionStorage.getItem("userAuthenticated"));
+}
+if (sessionStorage.getItem("userName") !== null) {
+    name.set(sessionStorage.getItem("userName"));
+}
+if (sessionStorage.getItem("userIsAdmin")  !== null) {
+    isAdmin.set(sessionStorage.getItem("userIsAdmin"));
+}
+if (sessionStorage.getItem("userUUID")  !== null) {
+    UUID.set(sessionStorage.getItem("userUUID"));
+}
+//
 
-//storing profile info for ease of use + reducing api calls
-export const name = persistStore('name',"missingName");
-export const isAdmin = persistStore('isAdmin',false);
-export const UUID = persistStore('UUID',"missingUUID");
-export const ghost = persistStore('ghost',false);
-//export const createdAt = persistStore('createdAt',"missing date");
+authenticated.subscribe((val) => sessionStorage.setItem("userAuthenticated",val));
+name.subscribe((val) => sessionStorage.setItem("userName",val));
+isAdmin.subscribe((val) => sessionStorage.setItem("userIsAdmin",val));
+UUID.subscribe((val) => sessionStorage.setItem("userUUID",val));

@@ -1,60 +1,67 @@
-//USE ENVIRONMENT CONFIG
-import * as dotenv from 'dotenv'
-dotenv.config()
-
-//EXPRESS
 import express from "express";
+import http from "http";
+import { Server } from "socket.io";
+import "dotenv/config";
+
 const app = express();
-
-//EXPRESS SECURITY
-/*
-import helmet from "helmet";
-app.use(helmet());
-
-import rateLimit from "express-rate-limit";
-const generalLimiter = rateLimit({
-    windowMs: 10 * 60 * 1000,
-    max: 80
-});
-app.use(generalLimiter);*/
-
-//EXPRESS SESSIONS
-import session from "express-session";
-const sessionTimeLimit= 1000 * 60 * 60; // one hour
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: sessionTimeLimit, secure: false }
-}));
-
-//OTHER...
-import path from "path";
-app.use(express.static(path.resolve("../client/dist")));
+const server = http.createServer(app);
+const io = new Server(server);
 
 app.use(express.json());
 
-import cors from "cors";
-app.use(cors());
-
-//ROUTERS
-import userRouter from "./routers/userRouter.js";
-app.use(userRouter);
-
-import contactRouter from "./routers/contactRouter.js";
-app.use(contactRouter);
-
-import stockRouter from "./routers/stockRouter.js";
-app.use(stockRouter);
-
-
-//SERVE FRONTEND
-import fs from "fs";
-
-const page = fs.readFileSync("../client/dist/index.html").toString();
-app.get("*", (req, res) => {
-    res.send(page);
+//SESSIONS
+import session from "express-session";
+const sessionMiddleware = session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true
 });
 
-const PORT = process.env.SERVER_PORT;
-app.listen(PORT, () => console.log("Server is running on port", PORT));
+app.use(sessionMiddleware);
+
+//SECURITY
+import rateLimit from "express-rate-limit";
+const generalLimiter = rateLimit({
+    windowMs: 10 * 60 * 1000, //minutes
+    max: 500
+});
+
+app.use(generalLimiter);
+
+//ROUTES
+import userRouter from "./routers/userRouter.js";
+import stockRouter from "./routers/stockRouter.js";
+import contactRouter from "./routers/contactRouter.js";
+
+app.use(userRouter);
+app.use(stockRouter);
+app.use(contactRouter);
+
+//SOCKET
+import { randomInt } from "crypto";
+
+io.on("connection", (socket) => {
+    //TODO: use data from client to determine which stock to send
+    //socket.data.ticker
+
+    const tickerPrice = randomInt(300) + 20;
+
+    socket.emit('stockprice', tickerPrice + randomInt(10));
+
+    setInterval(function() {    
+        socket.emit('stockprice', tickerPrice + randomInt(10));
+    },10000/25);
+});
+
+//SERVE FRONTEND
+import path from "path";
+
+const distFolderPath = path.resolve("../client/dist/");
+
+app.use(express.static(distFolderPath));
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(distFolderPath, "index.html"));
+});
+
+const PORT = Number(process.env.SERVER_PORT) || 8080;
+server.listen(PORT, () => console.log("Server is running on port", PORT));

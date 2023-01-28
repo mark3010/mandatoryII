@@ -1,122 +1,137 @@
+
+
 /* NAVBAR */
 
 
 /* SIGN IN / SIGN UP */
-html {
-  height: 100vh;
-  overflow: hidden;
+
+body, #app, main {
+    height: 100%;
+    background-color: #f5f5f5;
+  }
+  
+  .page {
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #f5f5f5; */
+    padding-bottom: 6rem;
+  }
+  
+  .form-signin {
+    max-width: 330px;
+    padding: 15px;
+  }
+  
+  .form-signin .form-floating:focus-within {
+    z-index: 2;
+  }
+  
+  .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  
+  .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  
+  
+  
+  /* COMMENT SECTION */
+  :root {
+    /* primary colors */
+    --moderateBlue: hsl(238, 40%, 52%);
+    --softRed: hsl(358, 79%, 66%);
+    --lightGrayishBlue: hsl(239, 57%, 85%);
+    --paleRed: hsl(357, 100%, 86%);
+  
+    /* neutral colors */
+    --darkBlue: hsl(212, 24%, 26%);
+    --grayishBlue: hsl(211, 10%, 45%);
+    --lightGray: hsl(223, 19%, 93%);
+    --veryLightGray: hsl(228, 33%, 97%);
+    --white: hsl(0, 0%, 100%);
+  
+    /* font */
+    --fontFamily: 'Rubic';
+    --fontRegular: 400;
+    --fontMedium: 500;
+    --fontBold: 700;
+  
+    /* breakpoints */
+    --brpMd: 46.875rem;
+    --brpLg: 90rem;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  
+  * {
+    margin: 0;
+  }
+  
+  body {
+    font-family: var(--fontFamily), sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    /* background-color: var(--veryLightGray); */
+    color: var(--grayishBlue);
+  }
+  
+  html,
+  body {
+    height: 100%;
+  }
+  
+  button {
+    cursor: pointer;
+    font-weight: var(--fontBold);
+  }
+  
+  input,
+  button,
+  textarea,
+  select {
+    font-size: inherit;
+    font-family: inherit;
+    color: inherit;
+  }
+  
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+
+  }
+  
+  h1:focus,
+  h2:focus,
+  h3:focus,
+  h4:focus,
+  h5:focus,
+  h6:focus{
+    outline: none;
 }
-body, #app, main, .page {
-  height: 100%;
-  background-color: #f5f5f5;
-}
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 
-.page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f5f5f5;
-  padding-bottom: 6rem;
-}
-
-.form-signin {
-  max-width: 330px;
-  padding: 15px;
-}
-
-.form-signin .form-floating:focus-within {
-  z-index: 2;
-}
-
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-
-
-/* COMMENT SECTION */
-:root {
-  /* primary colors */
-  --moderateBlue: hsl(238, 40%, 52%);
-  --softRed: hsl(358, 79%, 66%);
-  --lightGrayishBlue: hsl(239, 57%, 85%);
-  --paleRed: hsl(357, 100%, 86%);
-
-  /* neutral colors */
-  --darkBlue: hsl(212, 24%, 26%);
-  --grayishBlue: hsl(211, 10%, 45%);
-  --lightGray: hsl(223, 19%, 93%);
-  --veryLightGray: hsl(228, 33%, 97%);
-  --white: hsl(0, 0%, 100%);
-
-  /* font */
-  --fontFamily: 'Rubic';
-  --fontRegular: 400;
-  --fontMedium: 500;
-  --fontBold: 700;
-
-  /* breakpoints */
-  --brpMd: 46.875rem;
-  --brpLg: 90rem;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-* {
-  margin: 0;
-}
-
-body {
-  font-family: var(--fontFamily), sans-serif;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  background-color: var(--veryLightGray);
-  color: var(--grayishBlue);
-}
-
-html,
-body {
-  height: 100%;
-}
-
-button {
-  cursor: pointer;
-  font-weight: var(--fontBold);
-}
-
-input,
-button,
-textarea,
-select {
-  font-size: inherit;
-  font-family: inherit;
-  color: inherit;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
-}
-
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+  .align-me {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
