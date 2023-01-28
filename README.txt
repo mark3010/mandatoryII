@@ -1,2 +1,2 @@
-Mandatory 2 assignment | NODEJS
+Exam assignment | NODEJS
 made by Mark Friis Larsen
